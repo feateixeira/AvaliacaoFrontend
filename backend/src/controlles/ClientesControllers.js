@@ -23,28 +23,34 @@ module.exports = {
     },
 
     async create(request, response) {
-        const {nome, cpf, endereco, telefone, email } = request.body;
+        const {nome, cpf, cep, logradouro, bairro, cidade, uf, telefone, email } = request.body;
         const user_id = request.headers.authorization;
 
 
     const [id] = await connection('clientes').insert({
         nome,
         cpf,
-        endereco,
+        cep,
+        logradouro,
+        bairro,
+        cidade,
+        uf,
         telefone,
         email,
         user_id,
     });
 
-    return response.json(id) ;
+    return response.json({id}) ;
     },
 
     async delete(request, response) {
         const { id } = request.params;
-        const user_id = await connection('clientes')
+        const user_id = request.headers.authorization;
+
+        const clientes = await connection('clientes')
             .where('id', id)
             .select('user_id')
-            .firt();
+            .first();
 
             if(clientes.user_id !== user_id) {
                 return response.status(401).json({error: 'Operação nao permitida.'});

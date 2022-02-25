@@ -8,10 +8,11 @@ module.exports = {
     },
 
     async create(request, response) {
-        const {id, senha} = request.body;
+        const {id, user, senha} = request.body;
 
     await connection('users').insert({
         id,
+        user,
         senha,
     })
 

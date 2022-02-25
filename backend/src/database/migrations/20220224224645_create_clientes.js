@@ -5,7 +5,11 @@ exports.up = function(knex) {
 
     table.string('nome').notNullable();
     table.string('cpf').notNullable();
-    table.string('endereco').notNullable();
+    table.string('cep').notNullable();
+    table.string('logradouro').notNullable();
+    table.string('bairro').notNullable();
+    table.string('cidade').notNullable();
+    table.string('uf', 2).notNullable();
     table.string('telefone').notNullable();
     table.string('email').notNullable();
 

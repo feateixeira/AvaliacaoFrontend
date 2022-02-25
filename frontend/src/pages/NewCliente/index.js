@@ -39,7 +39,7 @@ export default function NewIncident() {
     };
 
     try {
-      await api.post('cliente', data, {
+      await api.post('clientes', data, {
         headers: {
           Authorization: userId,
         }

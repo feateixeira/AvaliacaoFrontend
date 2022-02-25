@@ -9,22 +9,19 @@ import './styles.css';
 
 
 export default function Login() {
-  const [id, setId] = useState('');
+  const [user, setUser] = useState('');
   const [senha, setPassword] = useState('');
   const history = useHistory();
 
   async function handleLogin(e) {
     e.preventDefault();
 
-    localStorage.setItem('ongId', id);
-
-    history.push('/profile');
     try {
-      const response = await api.post('sessions', { id, senha });
+      const response = await api.post('sessions', { user, senha });
       
 
-      localStorage.setItem('nameId', id);  
-      localStorage.setItem('userName', response.data.id);
+      localStorage.setItem('nameId', user);  
+      localStorage.setItem('userName', response.data.user);
       
       history.push('/profile');
     } catch (err) {
@@ -42,8 +39,8 @@ export default function Login() {
 
           <input 
             placeholder="Id"
-            value={id}
-            onChange={e => setId(e.target.value)}
+            value={user}
+            onChange={e => setUser(e.target.value)}
           />
 
           <input 

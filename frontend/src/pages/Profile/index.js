@@ -12,7 +12,7 @@ export default function Profile() {
 
   const history = useHistory();
 
-  const userId = localStorage.getItem('user_id');
+  const userId = localStorage.getItem('user');
 
   useEffect(() => {
     api.get('profile', {
@@ -24,9 +24,9 @@ export default function Profile() {
     })
   }, [userId]);
 
-  async function handleDeleteIncident(user_id) {
+  async function handleDeleteIncident(id) {
     try {
-      await api.delete(`clientes/${user_id}`, {
+      await api.delete(`clientes/${id}`, {
         headers: {
           Authorization: userId,
         }
