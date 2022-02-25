@@ -15,7 +15,7 @@ module.exports = {
         senha,
     })
 
-    return response.json(id) ;
+    return response.json({ id }) ;
     },
     
 }

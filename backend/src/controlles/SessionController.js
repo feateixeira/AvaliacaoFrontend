@@ -1,18 +1,19 @@
-const connection = require('../database/connection'); 
+const connection = require('../database/connection');
+const { create } = require('./UserControllers')
 
 module.exports = {
     async create(request, response) {
-        const {nome} = request.body;
+        const { id } = request.body;
 
-        const users = await connection('users')
+        const user = await connection('users')
             .where('id', id)
-            .select('id')
+            .select('user_id')
             .first();
 
-            if(!users) {
+            if(!user) {
                 return response.status(400).json({ error: 'Usuario não existe' });
             }
 
-            return response.json(users)
+            return response.json(user)
     }
 }

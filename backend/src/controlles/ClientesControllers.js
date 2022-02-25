@@ -25,22 +25,24 @@ module.exports = {
     async create(request, response) {
         const {nome, cpf, endereco, telefone, email } = request.body;
         const user_id = request.headers.authorization;
-    await connection('clientes').insert({
+
+
+    const [id] = await connection('clientes').insert({
         nome,
         cpf,
         endereco,
         telefone,
         email,
         user_id,
-    })
+    });
 
-    return response.json(nome) ;
+    return response.json(id) ;
     },
 
     async delete(request, response) {
-        const { nome } = request.params;
-        const clientes = await connection('clientes')
-            .where('nome', nome)
+        const { id } = request.params;
+        const user_id = await connection('clientes')
+            .where('id', id)
             .select('user_id')
             .firt();
 
@@ -48,7 +50,7 @@ module.exports = {
                 return response.status(401).json({error: 'Operação nao permitida.'});
             }
 
-            await connection('clientes').where('nome', nome).delete();
+            await connection('clientes').where('id', id).delete();
 
             return response.status(204).send();
         }

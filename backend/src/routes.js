@@ -3,12 +3,15 @@ const express = require('express');
 const ClientesControllers = require('./controlles/ClientesControllers');
 const UserControllers = require('./controlles/UserControllers');
 const SessionControllers = require('./controlles/SessionController');
+const ProfileController = require('./controlles/ProfileControllers')
 const { Router } = require('express');
 
 const routes = express.Router();
 
 //rota para autenticação de login
 routes.post('/sessions', SessionControllers.create);
+
+routes.get('/profile', ProfileController.index);
 
 //rota para listagem de clientes da tabela
 routes.get('/clientes', ClientesControllers.index);

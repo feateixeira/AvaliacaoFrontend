@@ -1,29 +1,33 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
+
 import api from '../../services/api';
 
 import './styles.css';
 
-import logoImg from '../../assets/logo.svg';
-import heroesImg from '../../assets/heroes.png';
 
-export default function Logon() {
+export default function Login() {
   const [id, setId] = useState('');
+  const [senha, setPassword] = useState('');
   const history = useHistory();
 
   async function handleLogin(e) {
     e.preventDefault();
 
+    localStorage.setItem('ongId', id);
+
+    history.push('/profile');
     try {
-      const response = await api.post('sessions', { id });
+      const response = await api.post('sessions', { id, senha });
+      
 
-      localStorage.setItem('ongId', id);
-      localStorage.setItem('ongName', response.data.name);
-
+      localStorage.setItem('nameId', id);  
+      localStorage.setItem('userName', response.data.id);
+      
       history.push('/profile');
     } catch (err) {
-      alert('Falha no login, tente novamente.');
+      alert('Usuário não cadastrado/existe. Tente de novo!!');
     }
   }
 
@@ -36,7 +40,7 @@ export default function Logon() {
           <h1>Login</h1>
 
           <input 
-            placeholder="User"
+            placeholder="Id"
             value={id}
             onChange={e => setId(e.target.value)}
           />
@@ -44,8 +48,8 @@ export default function Logon() {
           <input 
             placeholder="Senha"
             type='password'
-            /* value={}
-            onChange={} */
+            value={senha}
+            onChange={e => setPassword(e.target.value)}
           />
 
           <button className="button" type="submit">Entrar</button>
