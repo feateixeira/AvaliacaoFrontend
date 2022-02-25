@@ -15,13 +15,12 @@
     background: #f0f0f5;
     box-shadow: 0 0 100px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
-  
-    display: flex;
-    justify-content: space-between;
+    align-items: center;
+    text-align: center;
     align-items: center;
   }
   
-  .new-incident-container .content section {
+  /* .new-incident-container .content section {
     width: 100%;
     max-width: 380px;
   }
@@ -45,4 +44,4 @@
   .new-incident-container .content form input,
   .new-incident-container .content form textarea {
     margin-top: 8px;
-  }
+  } */

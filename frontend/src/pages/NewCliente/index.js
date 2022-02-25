@@ -11,7 +11,11 @@ import './styles.css';
 export default function NewIncident() {
   const [nome, setName] = useState('');
   const [cpf, setCPF] = useState('');
-  const [endereco, setCounter] = useState('');  
+  const [cep, setCep] = useState('');    
+  const [logradouro, setLogradouro] = useState('');   
+  const [bairro, setBairro] = useState('');   
+  const [cidade, setCidade] = useState(''); 
+  const [uf, setUf] = useState(''); 
   const [telefone, setNumber] = useState('');  
   const [email, setEmail] = useState('');
 
@@ -25,7 +29,11 @@ export default function NewIncident() {
     const data = {
       nome,
       cpf,
-      endereco,
+      cep,
+      logradouro,
+      bairro,
+      cidade,
+      uf,
       telefone,
       email,
     };
@@ -68,11 +76,41 @@ export default function NewIncident() {
             onChange={e => setCPF(e.target.value)}
           />
 
-          <input 
-            placeholder="Endereço: "
-            value={endereco}
-            onChange={e => setCounter(e.target.value)}
+          <InputMask 
+            placeholder="CEP: "
+            marsk="99999-99"
+            style={{ width: 389 }}
+            value={cep}
+            onChange={e => setCep(e.target.value)}
           />
+
+          <input 
+            placeholder="UF: "
+            style={{ width: 389 }}
+            value={uf}
+            onChange={e => setUf(e.target.value)}
+          />
+          
+
+          <input 
+            placeholder="Logradouro: "
+            value={logradouro}
+            onChange={e => setLogradouro(e.target.value)}
+          />
+
+          <input 
+            placeholder="Bairro: "
+            value={bairro}
+            onChange={e => setBairro(e.target.value)}
+          />
+
+          <input 
+            placeholder="Cidade: "
+            value={cidade}
+            onChange={e => setCidade(e.target.value)}
+          />
+
+          
 
           <input 
             placeholder="Telefone: "

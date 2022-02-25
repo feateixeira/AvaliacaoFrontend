@@ -24,15 +24,15 @@ export default function Profile() {
     })
   }, [userId]);
 
-  async function handleDeleteIncident(id) {
+  async function handleDeleteIncident(user_id) {
     try {
-      await api.delete(`clients/${id}`, {
+      await api.delete(`clientes/${user_id}`, {
         headers: {
           Authorization: userId,
         }
       });
 
-      setClients(clientes.filter(clients => clients.id !== id));
+      setClients(clientes.filter(client => client.userId !== userId));
     } catch (err) {
       alert('Erro ao deletar caso, tente novamente.');
     }
@@ -49,7 +49,7 @@ export default function Profile() {
       <header>
         <span>Bem vindo, {userId}</span>
 
-        <Link className="button" to="/clientes/new">Cadastrar novo cliente</Link>
+        <Link className="button" to="/cliente/new">Cadastrar novo cliente</Link>
         <button onClick={handleLogout} type="button">
           <FiPower size={18} color="#E02041" />
         </button>
@@ -66,7 +66,19 @@ export default function Profile() {
               <strong>CPF:</strong>
               <p>{client.cpf}</p>
 
-              <strong>Endereço: </strong>
+              <strong>CEP: </strong>
+              <p>{client.cep}</p>
+
+              <strong>Logradouro: </strong>
+              <p>{client.logradouro}</p>
+
+              <strong>Bairro: </strong>
+              <p>{client.bairro}</p>
+
+              <strong>Cidade: </strong>
+              <p>{client.endereco}</p>
+
+              <strong>UF: </strong>
               <p>{client.endereco}</p>
 
               <strong>Email: </strong>

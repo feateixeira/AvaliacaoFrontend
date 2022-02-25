@@ -7,7 +7,7 @@ module.exports = {
 
         const user = await connection('users')
             .where('id', id)
-            .select('user_id')
+            .select('id')
             .first();
 
             if(!user) {

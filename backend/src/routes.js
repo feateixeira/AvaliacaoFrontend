@@ -4,7 +4,7 @@ const ClientesControllers = require('./controlles/ClientesControllers');
 const UserControllers = require('./controlles/UserControllers');
 const SessionControllers = require('./controlles/SessionController');
 const ProfileController = require('./controlles/ProfileControllers')
-const { Router } = require('express');
+
 
 const routes = express.Router();
 
