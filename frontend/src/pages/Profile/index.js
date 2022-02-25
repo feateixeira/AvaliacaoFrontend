@@ -24,9 +24,9 @@ export default function Profile() {
     })
   }, [userId]);
 
-  async function handleDeleteIncident(id) {
+  async function handleDeleteIncident(user_id) {
     try {
-      await api.delete(`clientes/${id}`, {
+      await api.delete(`clientes/${user_id}`, {
         headers: {
           Authorization: userId,
         }
@@ -76,10 +76,10 @@ export default function Profile() {
               <p>{client.bairro}</p>
 
               <strong>Cidade: </strong>
-              <p>{client.endereco}</p>
+              <p>{client.cidade}</p>
 
               <strong>UF: </strong>
-              <p>{client.endereco}</p>
+              <p>{client.uf}</p>
 
               <strong>Email: </strong>
               <p>{client.email}</p>
