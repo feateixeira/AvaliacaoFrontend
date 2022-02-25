@@ -34,7 +34,7 @@ export default function Profile() {
 
       setClients(clientes.filter(client => client.userId !== userId));
     } catch (err) {
-      alert('Erro ao deletar caso, tente novamente.');
+      alert('Erro ao deletar cliente, tente novamente.');
     }
   }
 
