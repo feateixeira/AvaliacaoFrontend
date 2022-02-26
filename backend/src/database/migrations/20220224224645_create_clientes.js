@@ -9,6 +9,7 @@ exports.up = function(knex) {
     table.string('logradouro').notNullable();
     table.string('bairro').notNullable();
     table.string('cidade').notNullable();
+    table.string('complemento').notNullable();
     table.string('uf', 2).notNullable();
     table.string('telefone').notNullable();
     table.string('email').notNullable();

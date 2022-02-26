@@ -23,7 +23,7 @@ module.exports = {
     },
 
     async create(request, response) {
-        const {nome, cpf, cep, logradouro, bairro, cidade, uf, telefone, email } = request.body;
+        const {nome, cpf, cep,complemento, logradouro, bairro, cidade, uf, telefone, email } = request.body;
         const user_id = request.headers.authorization;
 
 
@@ -36,6 +36,7 @@ module.exports = {
         cidade,
         uf,
         telefone,
+        complemento,
         email,
         user_id,
     });
