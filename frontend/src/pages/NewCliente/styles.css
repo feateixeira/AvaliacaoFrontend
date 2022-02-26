@@ -36,9 +36,6 @@
     line-height: 32px;
   }
   
- .btnsecundary {
-   width: 35px;
-   height: auto;
-   position: relative;
-   
- }
+.btnadd {
+  display: table-row;
+}

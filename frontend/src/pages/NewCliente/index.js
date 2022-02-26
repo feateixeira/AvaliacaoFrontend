@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { FiArrowLeft, FiPhone } from 'react-icons/fi';
+import { FiArrowLeft, FiPlus } from 'react-icons/fi';
 import InputMask from 'react-input-mask';
 import { useForm } from 'react-hook-form';
 
@@ -22,7 +22,7 @@ export default function NewIncident() {
   const [uf, setUf] = useState(''); 
   const [complemento, setComplemento] = useState('');
   const [telefone, setNumber] = useState([]);  
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState([]);
 
   const history = useHistory();
 
@@ -72,10 +72,16 @@ export default function NewIncident() {
       });
   }
 
-  const addInputBtn = (e) => {
+  const addPhoneBtn = (e) => {
     e.preventDefault()
 
     setNumber([ ...telefone, '']);
+  }
+
+  const addEmailBtn = (e) => {
+    e.preventDefault()
+
+    setEmail([ ...email, '']);
   }
 
   return (
@@ -87,6 +93,7 @@ export default function NewIncident() {
             <FiArrowLeft size={16} color="#E02041" />
             Voltar para home
           </Link>
+          
         </section>
 
         
@@ -161,17 +168,17 @@ export default function NewIncident() {
             name="complemento"
             value={complemento}
             onChange={e => setComplemento(e.target.value)}
-          />      
-
-          <input 
-            placeholder="Telefone: "
-            value={telefone}
-            onChange={e => setNumber(e.target.value)}
-            required="true"            
           />
 
-          {telefone.map((telefone, index) => (
+          <input 
+              placeholder="Telefone: "
+              value={telefone}
+              onChange={e => setNumber(e.target.value)}
+              required="true"            
+          />          
           
+          {telefone.map((telefone, index) => (
+            
               <input key={index}
               placeholder="Telefone: "
               value={telefone}
@@ -179,12 +186,7 @@ export default function NewIncident() {
               required="true"        
               />  
 
-
-          ))}
-
-              <button className='btnsecundary' onClick={addInputBtn}>
-                <FiPhone />
-              </button>         
+          ))}       
           
 
           <input 
@@ -194,6 +196,31 @@ export default function NewIncident() {
             onChange={e => setEmail(e.target.value)}
             required="true"
           />
+
+          {email.map((email, index) => (
+            
+            <input key={index}
+            placeholder="Email: "
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+            required="true"        
+            />  
+
+        ))}  
+
+          <div className='btnadd'>
+
+            <Link className='overlay' onClick={addPhoneBtn}>
+              <FiPlus size={16} />      
+              Add Phone
+            </Link>
+
+            <Link className='overlay' onClick={addEmailBtn}>                    
+              Add Email
+              <FiPlus size={16} />
+            </Link>
+
+          </div>
 
           <button className="button" type="submit">Cadastrar</button>
         </form>

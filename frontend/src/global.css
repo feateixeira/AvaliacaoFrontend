@@ -64,8 +64,7 @@ form textarea {
 
 .back-link {
   display: flex;
-  align-items: center;
-  margin-top: 40px;
+  align-items: end;
   color: #41414d;
   font-size: 18px;
   text-decoration: none;
@@ -78,5 +77,25 @@ form textarea {
 }
 
 .back-link:hover {
+  opacity: 0.8;
+}
+
+.overlay {
+  align-items: center;
+  margin-top: 15px;
+  margin-bottom: 20px;
+  margin-left: 255px;
+  color: #41414d;
+  font-size: 18px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: opacity 0.2s;
+}
+
+.overlay svg {
+  margin-right: 8px;
+}
+
+.overlay:hover {
   opacity: 0.8;
 }
