@@ -164,7 +164,7 @@ export default function NewIncident() {
           />    
 
           <input 
-            placeholder="Complemento: "
+            placeholder="Complemento (opcional):  "
             name="complemento"
             value={complemento}
             onChange={e => setComplemento(e.target.value)}
