@@ -13,20 +13,22 @@ export default function Login() {
   const [senha, setPassword] = useState('');
   const history = useHistory();
 
+
   async function handleLogin(e) {
     e.preventDefault();
 
-    try {
-      const response = await api.post('sessions', { user, senha });
-      
+    
+      try {
+        const response = await api.post('sessions', { user, senha });
+        
 
-      localStorage.setItem('nameId', user);  
-      localStorage.setItem('userName', response.data.user);
-      
-      history.push('/profile');
-    } catch (err) {
-      alert('Usuário não cadastrado/existe. Tente de novo!!');
-    }
+        localStorage.setItem('nameId', user);  
+        localStorage.setItem('userName', response.data.user);
+        
+        history.push('/profile');
+      } catch (err) {
+        alert('Usuário não cadastrado/existe. Tente de novo!!');
+      }
   }
 
   return (
