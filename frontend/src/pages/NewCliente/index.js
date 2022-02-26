@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { FiArrowLeft } from 'react-icons/fi';
+import { FiArrowLeft, FiPhone } from 'react-icons/fi';
 import InputMask from 'react-input-mask';
 import { useForm } from 'react-hook-form';
 
@@ -21,7 +21,7 @@ export default function NewIncident() {
   const [cidade, setCidade] = useState(''); 
   const [uf, setUf] = useState(''); 
   const [complemento, setComplemento] = useState('');
-  const [telefone, setNumber] = useState('');  
+  const [telefone, setNumber] = useState([]);  
   const [email, setEmail] = useState('');
 
   const history = useHistory();
@@ -72,6 +72,12 @@ export default function NewIncident() {
       });
   }
 
+  const addInputBtn = (e) => {
+    e.preventDefault()
+
+    setNumber([ ...telefone, '']);
+  }
+
   return (
     <div className="new-incident-container">
       <div className="content">
@@ -92,7 +98,6 @@ export default function NewIncident() {
             value={nome}
             minLength="3"
             maxLength="100"
-            pattern="[AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYySs  0123456789]"
             onChange={e => setName(e.target.value)}
             required="true"
           />
@@ -107,8 +112,8 @@ export default function NewIncident() {
 
           <InputMask 
             placeholder="CEP: "
-            marsk="99999-99"
-            onBlur={checkCEP }
+            mask="999999-99"
+            onBlur={checkCEP}
             name="cep"
             value={cep}
             onChange={e => setCep(e.target.value)}
@@ -162,11 +167,29 @@ export default function NewIncident() {
             placeholder="Telefone: "
             value={telefone}
             onChange={e => setNumber(e.target.value)}
-            required="true"
+            required="true"            
           />
+
+          {telefone.map((telefone, index) => (
+          
+              <input key={index}
+              placeholder="Telefone: "
+              value={telefone}
+              onChange={e => setNumber(e.target.value)}
+              required="true"        
+              />  
+
+
+          ))}
+
+              <button className='btnsecundary' onClick={addInputBtn}>
+                <FiPhone />
+              </button>         
+          
 
           <input 
             placeholder="Email: "
+            type="email"
             value={email}
             onChange={e => setEmail(e.target.value)}
             required="true"
