@@ -8,6 +8,8 @@ import './styles.css';
 
 
 export default function Profile() {
+
+
   const [clientes, setClients] = useState([]);
 
   const history = useHistory();
@@ -44,6 +46,7 @@ export default function Profile() {
 
     history.push('/');
   }
+  
 
   return (
     <div className="profile-container">
