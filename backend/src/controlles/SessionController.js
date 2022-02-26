@@ -3,17 +3,18 @@ const { create } = require('./UserControllers')
 
 module.exports = {
     async create(request, response) {
-        const { user } = request.body;
+        const { user, senha } = request.body;
 
         const users = await connection('users')
             .where('user', user)
-            .select('user')
+            .where('senha', senha)
+            .select("*")
             .first();
 
-            if(!users) {
+            if(!users || !senha) {
                 return response.status(400).json({ error: 'Usuario não existe' });
             }
 
-            return response.json(users)
+            return response.json({user, senha})
     }
 }

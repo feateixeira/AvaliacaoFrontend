@@ -16,7 +16,7 @@ routes.get('/profile', ProfileController.index);
 
 routes.get('/clientes', ClientesControllers.index);
 routes.post('/clientes', ClientesControllers.create);
-routes.delete('/clientes/:user_id', ClientesControllers.delete);
+routes.delete('/clientes/:id', ClientesControllers.delete);
 
 
 routes.get('/users', UserControllers.index);

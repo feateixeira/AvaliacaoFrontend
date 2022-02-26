@@ -13,11 +13,12 @@ export default function Profile() {
   const history = useHistory();
 
   const userId = localStorage.getItem('user');
+  const userPassword = localStorage.getItem('senha');
 
   useEffect(() => {
     api.get('profile', {
       headers: {
-        Authorization: userId,
+        Authorization: userId, userPassword
       }
     } ).then(response => {
       setClients(response.data);

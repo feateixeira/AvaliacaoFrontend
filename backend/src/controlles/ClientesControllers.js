@@ -52,8 +52,8 @@ module.exports = {
             .select('user_id')
             .first();
 
-            if(clientes.user_id !== user_id) {
-                return response.status(401).json({error: 'Operação nao permitida.'});
+            if (clientes.user_id !== user_id) {
+                return response.status(401).json({error: 'Operação nao permitida. '});
             }
 
             await connection('clientes').where('id', id).delete();
