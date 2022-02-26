@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { FiArrowLeft } from 'react-icons/fi';
 import InputMask from 'react-input-mask';
-import { Formik } from 'formik';
+import { useForm } from 'react-hook-form';
 
 import api from '../../services/api';
 
@@ -10,6 +10,9 @@ import './styles.css';
 
 
 export default function NewIncident() {
+
+  const {register, handleSubmit, setValue, setFocus} = useForm();
+
   const [nome, setName] = useState('');
   const [cpf, setCPF] = useState('');
   const [cep, setCep] = useState('');    
@@ -17,6 +20,7 @@ export default function NewIncident() {
   const [bairro, setBairro] = useState('');   
   const [cidade, setCidade] = useState(''); 
   const [uf, setUf] = useState(''); 
+  const [complemento, setComplemento] = useState('');
   const [telefone, setNumber] = useState('');  
   const [email, setEmail] = useState('');
 
@@ -52,22 +56,19 @@ export default function NewIncident() {
     }
   }
 
-   function onBlurCep(ev, setFieldValue) {
-    const { value } = ev.target;
-
-    const cep = value?.replace(/[^0-9]/g, '');
-
-    if (cep?.length !== 8) {
-      return;
-    }
+   function checkCEP(e) {
+     
+      const cep = e.target.value.replace(/\D/g, '');
+      console.log(cep);
+    
 
     fetch(`https://viacep.com.br/ws/${cep}/json/`)
       .then((res) => res.json())
       .then((data) => {
-        setFieldValue('logradouro', data.logradouro);
-        setFieldValue('bairro', data.bairro);
-        setFieldValue('cidade', data.localidade);
-        setFieldValue('uf', data.uf);
+        setValue('address', data.logradouro);
+        setValue('neighborhood', data.bairro);
+        setValue('city', data.localidade);
+        setValue('uf', data.uf); 
       });
   }
 
@@ -82,18 +83,7 @@ export default function NewIncident() {
           </Link>
         </section>
 
-        <Formik
-          validateOnMount
-          initialValues={{
-            cep: '',
-            logradouro: '',
-            numero: '',
-            complemento: '',
-            bairro: '',
-            cidade: '',
-            uf: '',
-          }}
-          render={({ isValid, setFieldValue }) => (
+        
 
         <form onSubmit={handleNewCliente}>
 
@@ -118,7 +108,7 @@ export default function NewIncident() {
           <InputMask 
             placeholder="CEP: "
             marsk="99999-99"
-            onBlur={(ev) => onBlurCep(ev, setFieldValue)}
+            onBlur={checkCEP }
             name="cep"
             value={cep}
             onChange={e => setCep(e.target.value)}
@@ -130,6 +120,7 @@ export default function NewIncident() {
             value={uf}
             onChange={e => setUf(e.target.value)}
             required="true"
+            {...register("uf" )}
           />
           
 
@@ -139,6 +130,7 @@ export default function NewIncident() {
             value={logradouro}
             onChange={e => setLogradouro(e.target.value)}
             required="true"
+            {...register("address" )}
           />
 
           <input 
@@ -147,6 +139,7 @@ export default function NewIncident() {
             value={bairro}
             onChange={e => setBairro(e.target.value)}
             required="true"
+            {...register("neighborhood" )}
           />
 
           <input 
@@ -155,7 +148,15 @@ export default function NewIncident() {
             value={cidade}
             onChange={e => setCidade(e.target.value)}
             required="true"
-          />          
+            {...register("city" )}
+          />    
+
+          <input 
+            placeholder="Complemento: "
+            name="complemento"
+            value={complemento}
+            onChange={e => setComplemento(e.target.value)}
+          />      
 
           <input 
             placeholder="Telefone: "
@@ -174,8 +175,6 @@ export default function NewIncident() {
           <button className="button" type="submit">Cadastrar</button>
         </form>
 
-        )}
-        />
       </div>
     </div>
   )
